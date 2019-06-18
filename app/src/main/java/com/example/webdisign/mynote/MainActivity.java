@@ -58,14 +58,15 @@ public class MainActivity extends AppCompatActivity {
         adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, list);
         noteList.setAdapter(adapter);
 
-        list.add("TEST1");
-        list.add("TEST2");
-        list.add("TEST3");
+        SharedPreferences sp = getSharedPreferences("MyNote",0);
+        int max = sp.getInt("MAX",0);
 
-        content.add("CONTENT1");
-        content.add("CONTENT2");
-        content.add("CONTENT3");
+        for (int pos = 0; pos < max; pos++){
+            list.add(sp.getString("제목" + pos,""));
+            content.add(sp.getString("내용" + pos,""));
+        }
 
+        adapter.notifyDataSetChanged();
         noteList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -118,6 +119,27 @@ public class MainActivity extends AppCompatActivity {
         adapter.notifyDataSetChanged();
         InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(noteContent.getWindowToken(), 0);
+
+        WritePref();
+    }
+
+    void WritePref(){
+        //SharedPref...에 모든 데이터 저장
+        SharedPreferences sp = getSharedPreferences("MyNote",0);
+        SharedPreferences.Editor editor = sp.edit(); //쓰기 가능
+
+        //다 지우기
+        editor.clear();
+        editor.commit();
+
+        //다시 저장
+        for (int i =0; i <noteList.getCount(); i++){
+            editor.putString("제목"+i,list.get(i));
+            editor.putString("내용"+i, content.get(i));
+
+        }
+        editor.putInt("MAX",list.size());
+        editor.commit();
     }
 
     void newNote(View view){
