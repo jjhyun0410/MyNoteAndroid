@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:orientation="vertical"
+    android:padding="10dp"
+    tools:context=".MainActivity">
+
+    <ListView
+        android:id="@+id/noteList"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"></ListView>
+
+
+    <EditText
+        android:id="@+id/noteTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#cbd7e2"
+        android:hint="제목" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <EditText
+            android:id="@+id/noteContent"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:background="#ffffff"
+            android:hint="내용 들어올 자리" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/btnNew"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:onClick="newNote"
+                android:text="새노트" />
+
+            <Button
+                android:id="@+id/btnAdd"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:onClick="noteWrite"
+                android:text="저장" />
+
+            <Button
+                android:id="@+id/btnDelete"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:onClick="noteDelete"
+                android:text="삭제" />
+
+            <Button
+                android:id="@+id/btnFinish"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:onClick="finish"
+                android:text="종료" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+</LinearLayout>
